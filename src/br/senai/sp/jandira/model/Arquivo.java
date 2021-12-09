@@ -1,4 +1,4 @@
-package br.senai.sp.jandira.arraylist;
+package br.senai.sp.jandira.model;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,6 +17,9 @@ public class Arquivo {
 		conteudo = ler();
 		this.conteudo = conteudo;
 	}
+	
+	public Arquivo() {
+	}
 
 	public String getConteudo() {
 		return conteudo;
@@ -34,11 +37,11 @@ public class Arquivo {
 		this.caminho = caminho;
 	}
 
-	public void escrever(String texto) {
+	public boolean escrever(String caminho, String texto) {
 		try {
 
 			// OBJETO QUE REPRESENTA O ARQUIVO
-			FileWriter arquivo = new FileWriter(this.caminho);
+			FileWriter arquivo = new FileWriter(caminho);
 
 			// OBJETO QUE REPRESENTA A MANIPULAÇÃO (ESCREVER) DOS DADOS DO ARQUIVO
 			PrintWriter escreverArq = new PrintWriter(arquivo);
@@ -46,10 +49,12 @@ public class Arquivo {
 			conteudo += texto +"\n";
 			escreverArq.append(conteudo);
 			escreverArq.close();
+			return true;
 
 		} catch (IOException e) {
 
 			System.out.println("ERRO: " + e.getMessage());
+			return false;
 		}
 	}
 
